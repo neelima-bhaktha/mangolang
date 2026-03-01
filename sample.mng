@@ -1,0 +1,6 @@
+panyaa("adaga should not change")
+
+i = 0
+adaga i < 3:
+    panyaa("Working")
+    i = i + 1
