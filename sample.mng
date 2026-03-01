@@ -1,1 +1,7 @@
-panyaa("neelima namaskara")
+panyaa("andhaa inside string")
+
+andhaa_var = 10
+panyaa(andhaa_var)
+
+andhaa 5 > 2:
+    panyaa("Correct")

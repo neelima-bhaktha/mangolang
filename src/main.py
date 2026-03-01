@@ -19,15 +19,46 @@ SLANG_MAP = {
 
 
 def translate_code(code):
-    parts = re.split(r'(".*?"|\'.*?\')', code)
+    result = []
+    i = 0
+    length = len(code)
 
-    for i in range(len(parts)):
-        if not (parts[i].startswith('"') or parts[i].startswith("'")):
-            for slang, python_word in SLANG_MAP.items():
-                pattern = r'\b' + re.escape(slang) + r'\b'
-                parts[i] = re.sub(pattern, python_word, parts[i])
+    while i < length:
+        char = code[i]
 
-    return "".join(parts)
+        # Handle string literals
+        if char in ('"', "'"):
+            quote_type = char
+            string_token = char
+            i += 1
+
+            while i < length and code[i] != quote_type:
+                string_token += code[i]
+                i += 1
+
+            if i < length:
+                string_token += code[i]  # closing quote
+                i += 1
+
+            result.append(string_token)
+
+        # Handle identifiers
+        elif char.isalpha() or char == "_":
+            identifier = char
+            i += 1
+
+            while i < length and (code[i].isalnum() or code[i] == "_"):
+                identifier += code[i]
+                i += 1
+
+            # Replace only if exact match
+            result.append(SLANG_MAP.get(identifier, identifier))
+
+        else:
+            result.append(char)
+            i += 1
+
+    return "".join(result)
 
 
 def main():
