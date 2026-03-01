@@ -1,0 +1,9 @@
+README.md
+setup.py
+mangolang.egg-info/PKG-INFO
+mangolang.egg-info/SOURCES.txt
+mangolang.egg-info/dependency_links.txt
+mangolang.egg-info/entry_points.txt
+mangolang.egg-info/top_level.txt
+src/__init__.py
+src/main.py
